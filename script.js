@@ -72,29 +72,31 @@ async function getAIResponse(userMessage) {
       products
     )}. Provide personalized recommendations based on their needs, skin type, and concerns. Keep responses friendly and informative.`;
 
-    // Make request to OpenAI API
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: "gpt-4o",
-        messages: [
-          {
-            role: "system",
-            content: systemMessage,
-          },
-          {
-            role: "user",
-            content: userMessage,
-          },
-        ],
-        max_tokens: 500,
-        temperature: 0.7,
-      }),
-    });
+    // Make request to your Cloudflare Worker endpoint instead of OpenAI directly
+    const response = await fetch(
+      "https://loreal-builder.mjramse1.workers.dev/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "gpt-4o",
+          messages: [
+            {
+              role: "system",
+              content: systemMessage,
+            },
+            {
+              role: "user",
+              content: userMessage,
+            },
+          ],
+          max_tokens: 500,
+          temperature: 0.7,
+        }),
+      }
+    );
 
     // Check if the request was successful
     if (!response.ok) {
