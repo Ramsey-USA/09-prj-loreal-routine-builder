@@ -135,6 +135,28 @@ body {
   outline-offset: 2px;
 }
 
+/* chat messages */
+.message {
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  max-width: 80%;
+  line-height: 1.4;
+}
+
+.message.user {
+  background: #000;
+  color: #fff;
+  margin-left: auto;
+  text-align: right;
+}
+
+.message.ai {
+  background: #f0f0f0;
+  color: #333;
+  margin-right: auto;
+}
+
 /* visually hidden */
 .visually-hidden {
   position: absolute;
